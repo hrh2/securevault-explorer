@@ -1,0 +1,83 @@
+import { useState, useEffect } from "react";
+
+export const THEMES = {
+  dark: {
+    label: "Dark",
+    icon: "◐",
+    root: "bg-[#0a0e1a] text-slate-100",
+    sidebar: "bg-[#0d1221] border-slate-800",
+    panel: "bg-[#0d1221] border-slate-800",
+    header: "bg-[#0a0e1a]/80 border-slate-800",
+    nodeHover: "hover:bg-slate-800/60",
+    nodeSelected: "bg-cyan-500/10 border-l-2 border-cyan-400",
+    nodeFocused: "ring-1 ring-cyan-500/40",
+    text: "text-slate-300",
+    textMuted: "text-slate-500",
+    textAccent: "text-cyan-400",
+    badge: "bg-slate-800 text-slate-400",
+    searchBg: "bg-slate-900 border-slate-700 text-slate-200",
+    divider: "border-slate-800",
+    scrollbar: "scrollbar-dark",
+  },
+  light: {
+    label: "Light",
+    icon: "○",
+    root: "bg-slate-50 text-slate-900",
+    sidebar: "bg-white border-slate-200",
+    panel: "bg-white border-slate-200",
+    header: "bg-white/80 border-slate-200",
+    nodeHover: "hover:bg-slate-100",
+    nodeSelected: "bg-blue-50 border-l-2 border-blue-500",
+    nodeFocused: "ring-1 ring-blue-400/60",
+    text: "text-slate-700",
+    textMuted: "text-slate-400",
+    textAccent: "text-blue-600",
+    badge: "bg-slate-100 text-slate-500",
+    searchBg: "bg-slate-50 border-slate-300 text-slate-800",
+    divider: "border-slate-200",
+    scrollbar: "scrollbar-light",
+  },
+  midnight: {
+    label: "Midnight",
+    icon: "●",
+    root: "bg-[#07090f] text-slate-100",
+    sidebar: "bg-[#0b0d18] border-indigo-900/30",
+    panel: "bg-[#0b0d18] border-indigo-900/30",
+    header: "bg-[#07090f]/80 border-indigo-900/30",
+    nodeHover: "hover:bg-indigo-950/60",
+    nodeSelected: "bg-indigo-500/10 border-l-2 border-indigo-400",
+    nodeFocused: "ring-1 ring-indigo-500/40",
+    text: "text-slate-300",
+    textMuted: "text-indigo-400/60",
+    textAccent: "text-indigo-400",
+    badge: "bg-indigo-950/80 text-indigo-400",
+    searchBg: "bg-indigo-950/40 border-indigo-800/40 text-slate-200",
+    divider: "border-indigo-900/30",
+    scrollbar: "scrollbar-dark",
+  },
+  matrix: {
+    label: "Matrix",
+    icon: "▣",
+    root: "bg-[#020c02] text-green-300",
+    sidebar: "bg-[#010801] border-green-900/40",
+    panel: "bg-[#010801] border-green-900/40",
+    header: "bg-[#020c02]/80 border-green-900/40",
+    nodeHover: "hover:bg-green-950/60",
+    nodeSelected: "bg-green-500/10 border-l-2 border-green-400",
+    nodeFocused: "ring-1 ring-green-500/40",
+    text: "text-green-400",
+    textMuted: "text-green-700",
+    textAccent: "text-green-300",
+    badge: "bg-green-950 text-green-500",
+    searchBg: "bg-green-950/40 border-green-800/40 text-green-300",
+    divider: "border-green-900/40",
+    scrollbar: "scrollbar-dark",
+  },
+};
+
+export function useTheme() {
+  const [themeName, setThemeName] = useState("dark");
+  const theme = THEMES[themeName];
+
+  return { themeName, setThemeName, theme, themes: THEMES };
+}
