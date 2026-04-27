@@ -2,7 +2,7 @@
   "name": "securevault-explorer",
   "private": true,
   "description": "SecureVault offers high-security cloud storage for law firms and banks. Their backend engineers have built a robust API that returns folder structures efficiently. However, their current frontend is a simple list that is hard to navigate. Clients are complaining that they can't manage nested files easily.",
-  "version": "1.0.0",
+  "version": "2.4.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
