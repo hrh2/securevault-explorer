@@ -73,3 +73,100 @@ src/
 └── data/
     └── fileSystem.js      ← JSON data (mirrors data.json)
 ```
+
+---
+
+## 🌳 Recursive Strategy
+
+The heart of the app is `FileNode` in `src/components/FileNode.jsx`.
+
+```jsx
+export default function FileNode({ node, depth, ...props }) {
+  return (
+    <li>
+      <div style={{ paddingLeft: depth * 16 }}>
+        {node.name}
+      </div>
+      {node.type === "folder" && isExpanded && (
+        <ul>
+          {node.children.map(child => (
+            <FileNode key={child.id} node={child} depth={depth + 1} {...props} />
+          ))}
+        </ul>
+      )}
+    </li>
+  );
+}
+```
+
+- No hardcoded levels — depth is a number incremented per recursive call
+- Children only render when folder is expanded (performance)
+- `paddingLeft: depth * 16px` creates visual indentation automatically
+
+Supporting recursive utilities in `treeUtils.js`:
+- `flattenVisibleTree()` — walks expanded tree into a flat list for keyboard nav
+- `buildBreadcrumbPath()` — finds path from root to any target node
+- `findAncestors()` — collects parent IDs to expand when revealing a file
+- `searchTree()` — filters nodes recursively, preserving matched subtrees
+
+---
+
+## ⌨️ Keyboard Navigation
+
+Implemented in `useFileExplorer.js` using the flatten-then-index approach:
+
+1. `flattenVisibleTree()` collapses the visible tree into a linear array
+2. `focusedId` tracks which node has the cursor
+3. Arrow keys find the current index in the flat list and move it
+4. `nodeRefs` stores DOM references so `scrollIntoView()` keeps focused nodes visible
+
+| Key   | Action                        |
+|-------|-------------------------------|
+| `↑`   | Move to previous visible node |
+| `↓`   | Move to next visible node     |
+| `→`   | Expand focused folder         |
+| `←`   | Collapse focused folder       |
+| `↵`   | Select file / toggle folder   |
+| `Tab` | Move Selector                 |
+
+---
+
+## Breadcrumb Navigation (Wildcard Feature)
+
+Shows the full path to the selected file at all times.
+
+```
+Home / 01_Legal_Department / Active_Cases / Doe_vs_MegaCorp_Inc / Leak_Evidence.png
+```
+
+Uses `buildBreadcrumbPath()` which recursively traverses the tree, accumulating node names until it finds the target ID. The result is rendered as a `/`-separated trail with the final segment highlighted.
+
+**UX benefit:** In deeply nested trees, users lose spatial context. Breadcrumbs provide persistent orientation — you always know where you are, even after navigating with keyboard or search.
+
+---
+
+## Theme System
+
+Four themes in `useTheme.js`, each a plain object of Tailwind class strings:
+
+| Theme | Vibe |
+|---|---|
+| `dark` | Cyber-secure dark blue (default) |
+| `light` | Clean white for bright environments |
+| `midnight` | Deep indigo premium dark |
+| `matrix` | Terminal green for hackers |
+
+Adding a new theme = adding one object to `THEMES`. No CSS variables needed.
+
+---
+
+## Future Improvements
+
+- Right-click context menu (copy path, rename, delete)
+- Drag-and-drop reordering
+- Multi-select (Shift+Click, Ctrl+Click)
+- Virtual scrolling for 10,000+ file trees
+- Persistent state via localStorage
+- Inline file preview for images, PDFs, and text
+- Sort by name, size, or type
+- Collaborative multi-user cursors
