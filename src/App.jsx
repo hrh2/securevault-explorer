@@ -127,7 +127,7 @@ export default function App() {
                   <h2 className={`text-xl font-mono font-semibold ${theme.text} mb-2`}>SecureVault Explorer</h2>
                   <p className={`text-sm font-sans ${theme.textMuted} max-w-xs mx-auto`}>Browse and select files from the tree. Use keyboard arrows to navigate.</p>
                   <div className={`mt-8 grid grid-cols-2 gap-3 max-w-xs mx-auto text-xs font-mono ${theme.textMuted}`}>
-                    {[["↑ ↓","Navigate"],["→","Expand folder"],["←","Collapse folder"],["↵","Select file"]].map(([key,label]) => (
+                    {[["↑ ↓","Navigate"],["→","Expand folder"],["←","Collapse folder"],["↵","Select file"],["Tab","Move selector"]].map(([key,label]) => (
                       <div key={key} className={`flex items-center gap-2 px-3 py-2 rounded border ${theme.divider}`}>
                         <span className={`${theme.textAccent} font-bold`}>{key}</span>
                         <span>{label}</span>
