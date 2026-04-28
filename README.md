@@ -4,6 +4,17 @@
 
 ---
 
+## Design File
+
+Figma: https://www.figma.com/design/hvRFeZXsl9YUi5PNosBs3n/securevault-Explorer?node-id=0-1&t=EVxYS24ZR2qF7518-1
+
+Includes:
+- Typography scale
+- Color palette
+- Spacing system
+- Component states
+- Dark mode design system
+
 ## Features
 
 | Feature | Description |
@@ -76,7 +87,7 @@ src/
 
 ---
 
-## 🌳 Recursive Strategy
+## Recursive Strategy
 
 The heart of the app is `FileNode` in `src/components/FileNode.jsx`.
 
@@ -111,7 +122,7 @@ Supporting recursive utilities in `treeUtils.js`:
 
 ---
 
-## ⌨️ Keyboard Navigation
+## Keyboard Navigation
 
 Implemented in `useFileExplorer.js` using the flatten-then-index approach:
 
@@ -170,3 +181,15 @@ Adding a new theme = adding one object to `THEMES`. No CSS variables needed.
 - Inline file preview for images, PDFs, and text
 - Sort by name, size, or type
 - Collaborative multi-user cursors
+
+## Business Impact
+
+This file explorer is designed for high-security enterprise environments where users manage deeply nested sensitive documents.
+
+Key improvements:
+- Faster navigation through large datasets (recursive tree + keyboard control)
+- Reduced cognitive load with breadcrumb orientation
+- Efficient file discovery using live search
+- Accessible interface for power users
+
+These features directly improve productivity for professionals handling large volumes of structured files.
